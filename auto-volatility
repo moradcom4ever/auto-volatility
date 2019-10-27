@@ -1,0 +1,78 @@
+#!/bin/bash
+
+echo This script run all Volatility plugins on the specific memory dump, 
+echo and prints the results on text files.
+echo
+echo -e "Made by \e[1;4;31mMorad Rawashdeh @2019\e[0m"
+echo 
+echo
+
+echo	-n "Enter the name of the memory dump : "
+read	memory
+echo	-n "Enter the profile name : "
+read	profile
+echo	-n "Enter the path to save outputs (if you keep empty it will be saved on root) : "
+read	path
+echo
+echo -e "You have entered \e[1;92m '$memory' \e[0m as he memory name,"
+echo -e "You have entered \e[1;92m '$profile' \e[0m as the profile."
+echo -e "You have entered \e[1;92m '$path' \e[0m as the path to save outputs."  
+echo
+echo -e	-n "Start the script ? (\e[1;5m y \e[0m) "
+read	answer
+
+if [ "$answer" != "y" ];then 
+	exit 1
+fi
+
+echo
+
+array=("netscan" "connscan" "pslist" "psscan" "pstree" "psxview --apply-rules" "cmdline"
+"cmdscan" "consoles" "userassist" "strings" "callbacks" "shellbags" "filescan" 
+"envars --silent"  "getsids" "handles --silent" "modscan" "modules" "privs --silent" 
+"mutantscan"  "shimecache" "symlinkscan" "autoruns" "hivelist" "hivescan" "svcscan --verbose" 
+"ldrmodules" "hollowfind" "apihooks")
+
+echo -e	"Number of plugins to execute is : \e[1;92m ${#array[*]} \e[0m"
+echo
+
+for i in ${!array[*]};do
+	echo -e "Start plugin \e[1;92m ${array[$i]} \e[0m ( $i / ${#array[*]} ):"
+	text="$(echo ${array[$i]} | tr -d ' ')"
+	volatility -f $memory --profile=$profile ${array[$i]} > $path/$text.txt
+done
+
+echo 
+echo 	"All plugins have finished"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
