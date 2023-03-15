@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo This script run all Volatility plugins on the specific memory dump, 
+echo This script run all Volatility Linux plugins on the specific memory dump, 
 echo and prints the results on text files.
 echo
 echo -e "Made by \e[1;4;31mMorad Rawashdeh @2019\e[0m"
 echo 
 echo
 
-echo	-n "Enter the name of the memory dump : "
+echo	-n "Enter the full path of the memory dump : "
 read	memory
 echo	-n "Enter the profile name : "
 read	profile
